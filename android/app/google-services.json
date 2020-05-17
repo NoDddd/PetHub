@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "347733584865",
+    "firebase_url": "https://pethub-app-e2763.firebaseio.com",
+    "project_id": "pethub-app-e2763",
+    "storage_bucket": "pethub-app-e2763.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347733584865:android:f9f7b5995502957fdd80a0",
+        "android_client_info": {
+          "package_name": "com.example.tvarinki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347733584865-761qamqpqv0q2kb11908jh28cd1jd0as.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tvarinki",
+            "certificate_hash": "682417548342aaf86594ab16c90ca701167b234a"
+          }
+        },
+        {
+          "client_id": "347733584865-i1af2448teq730tgrtdh72pulh412q83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADBlRSl9L2EPYjagGxxII1ySSBMvj2NYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347733584865-i1af2448teq730tgrtdh72pulh412q83.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
