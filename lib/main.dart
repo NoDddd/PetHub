@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import './pages/MainPage.dart';
-
+// функція запуску програми
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
