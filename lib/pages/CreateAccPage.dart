@@ -7,13 +7,13 @@ class CreateAccPage extends StatefulWidget {
   }
   
   class _StateCreateAccPage extends State<CreateAccPage> {
-    String username = '';
+    String username;
     SnackBar error_bar = SnackBar(content: Text('Error input for username', style: TextStyle(color: Colors.red[700])), duration: Duration(seconds: 3),);
+    
 
-
-    void createacc(BuildContext context) {
-      if (username == '' || username.length < 6 || username.length > 13) {
-        Scaffold.of(context).showSnackBar(error_bar);
+    void createacc() {
+      if (username == '' || username.length < 6 || username.length > 13 || username == null) {
+        
       }
       else Navigator.of(context).pop(username);
     }
@@ -28,30 +28,38 @@ class CreateAccPage extends StatefulWidget {
               child: Stack(
                 children: [
                   Align(
-                    alignment: Alignment(0.5, 0.5),
+                    alignment: Alignment(0.6, 1),
                     child: Transform.rotate(angle: pi/4,
                     child: Icon(Icons.pets, size: 300, color: Color(0x790a7d00),)
                     )
                   ),
                   Align(
-                    alignment: Alignment(-0.5, -0.5),
+                    alignment: Alignment(-0.5, -1),
                     child: Transform.rotate(angle: -pi/3,
                     child: Icon(Icons.pets, size: 300, color: Color(0x790a9d10),)
                     )
                   ),
                   Align(
-                  alignment: Alignment(0, -.7),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'username',
-                      helperText: 'must contain at least 6 symbols, but not more that 13',
+                  alignment: Alignment(0, -.2),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.green, width: 0.5),),
+                        hintText: 'username',
+                        helperText: 'must contain at least 6 symbols, but not more that 13',
+                        helperMaxLines: 2,
+                      ),
+                      onFieldSubmitted: (str) { setState(() {username = str;});},
                     ),
-                    onFieldSubmitted: (str) { setState(() {username = str;});},
                   )
               ) 
               ]),
           ),
-          floatingActionButton: IconButton(icon: Icon(Icons.done), onPressed: () {createacc(context);}),
+          floatingActionButton: IconButton(
+            icon: Icon(Icons.done, color: Colors.brown[600],), 
+            splashColor: Colors.white,
+            onPressed: () {createacc();}),
       ),
     );
   }

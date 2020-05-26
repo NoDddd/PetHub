@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 class Pet {
-  String id;
   String alias;
   String type;
   String subtype;
@@ -8,7 +7,6 @@ class Pet {
   String bio;
 
   Pet ({
-    this.id,
     this.alias,
     this.type,
     this.subtype,
@@ -18,7 +16,6 @@ class Pet {
 
   factory Pet.fromDoc(DocumentSnapshot doc) {
     return Pet(
-    id: doc['id'],
     alias: doc['alias'],
     type: doc['type'],
     subtype: doc['subtype'],

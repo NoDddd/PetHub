@@ -18,9 +18,9 @@ int iconindex = 0;
       child: ListWheelScrollView(
       //padding: EdgeInsets.only(bottom: 10),
         itemExtent: 0.67 * MediaQuery.of(context).size.height,
-        diameterRatio: 4,
+        diameterRatio: 9,
         renderChildrenOutsideViewport: false,
-        offAxisFraction: -0.7,
+        offAxisFraction: -0.5,
         children: [
           for( var i = 0; i < 13; i++) 
           Container(
@@ -33,7 +33,7 @@ int iconindex = 0;
               Expanded(child: Align(child: Icon(Icons.pets, color: Colors.white, size: 30), alignment: Alignment.centerRight,widthFactor: 0.8,), flex: 1)
               ]), flex: 1),
             Expanded(child: Align(child: Text('TITLE', textScaleFactor: 2,), alignment: Alignment.centerLeft, ), flex: 1),
-            Expanded(child: Align(child: Text('Subtitle and description\n and some text\n in 4 lines max', textScaleFactor: 1,), alignment: Alignment.centerLeft),flex: 1),
+            Expanded(child: Align(child: Text('Subtitle and description\n and some text', textScaleFactor: 1,), alignment: Alignment.centerLeft),flex: 1),
             Expanded(child: FractionallySizedBox(child: 
             Container(color: Color.fromARGB(255, random.nextInt(255), random.nextInt(255), random.nextInt(255)), 
             child: FittedBox(child: Icon(Icons.pets), fit: BoxFit.contain)), widthFactor: 0.9, heightFactor: 0.97,), flex: 4),

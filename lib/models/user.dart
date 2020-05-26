@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 class User {
   String id;
-  String nickname;
+  String nickname = '';
   String profile;
   String email;
 
