@@ -4,5 +4,7 @@ A course project developed by Meow team with Flutter.
 
 ## For delevelopers
 
-Working on DEV branch
-// hello asd
+DEV - developer branch
+design - designers brach
+reband - branch for rebranding
+firebase - branch for database dev
