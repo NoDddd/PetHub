@@ -12,22 +12,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'PetHub',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.black87,
+        primaryColor: Colors.black,
         appBarTheme: AppBarTheme(
           color: Colors.yellow
         ),
         scaffoldBackgroundColor: _black[70],
         fontFamily: 'Cinzel',
-        iconTheme: IconThemeData(color: _black),
+        bottomAppBarColor: Colors.black,
       ),
       home: MainPage(),
     );
   }
 }
-// hello
+
 
 MaterialColor _black = new MaterialColor(
   0xFF000000,

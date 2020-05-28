@@ -126,6 +126,7 @@ class _MainPageState extends State<MainPage> {
       width: size.width,
       color: Colors.black87,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[  
           Flexible(flex: 1, child: Container()),
           Flexible(
@@ -138,21 +139,31 @@ class _MainPageState extends State<MainPage> {
             colors: [Colors.yellowAccent, Colors.yellow, Colors.yellow[800], Colors.lime[900], Colors.black]
             )
           ),
-          Flexible(flex: 1, child: Container()),
-          Flexible(flex: 2, child: Align(
+          
+          Flexible(flex: 2, 
+          child: FractionallySizedBox(
+            alignment: Alignment.center,
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.yellow[200]),
                 borderRadius: BorderRadius.circular(11)
               ),
-            ))),
-            Flexible(flex: 2, child: Align(
+            ),
+            widthFactor: 0.8,
+            heightFactor: 0.6,
+            )),
+            Flexible(flex: 2, 
+            child: FractionallySizedBox(
+              alignment: Alignment.center,
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.yellow[200]),
                 borderRadius: BorderRadius.circular(11)
               ),
-            ))),
+            ),
+            widthFactor: 0.8,
+            heightFactor: 0.6,
+            )),
           Flexible (
           flex: 2,
           child: GestureDetector(
@@ -164,11 +175,11 @@ class _MainPageState extends State<MainPage> {
                     width: 180,
                     decoration: BoxDecoration(
                       image: DecorationImage(image: AssetImage('assets/sign-in-with-google.png'), fit:  BoxFit.fill)
-
                     ),
                   ),
                 ),
-              ))
+              )),
+            Flexible(flex: 1, child: Container())
             ],)
       );
   }
@@ -181,12 +192,10 @@ class _MainPageState extends State<MainPage> {
     if (!_is_sign_in) return signinpage();
     else return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('PetHub', style: TextStyle(color: Colors.indigo[900]),), 
-
-          leading: Icon(Icons.pets),
-          actions: <Widget>[IconButton(icon: Icon(Icons.search), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage(usersRef)));},)],
+        appBar: AppBar(title: Text('PetHub', style: TextStyle(color: Colors.black),), 
+          leading: Icon(Icons.pets, color: Colors.black),
+          actions: <Widget>[IconButton(icon: Icon(Icons.search, color: Colors.black), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage(usersRef)));},)],
         ),
-
         body: PageView(
           controller: pages_control,
           physics: NeverScrollableScrollPhysics(),

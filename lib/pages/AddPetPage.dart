@@ -32,10 +32,10 @@ class AddPetPage extends StatefulWidget {
     return SafeArea(
           child: Scaffold(
             key: _scaffoldKey,
-            appBar: AppBar(leading: FittedBox(child: Icon(Icons.pets), fit: BoxFit.fitWidth), title: Text('Account Settings', style: TextStyle(color: Colors.indigo[900])), backgroundColor: Colors.green[400],),
+            appBar: AppBar(leading: FittedBox(child: Icon(Icons.pets, color: Colors.black), fit: BoxFit.fitWidth), title: Text('Account Settings', style: TextStyle(color: Colors.black)), backgroundColor: Colors.yellow,),
             body: Container(
               width: double.infinity,
-              color: Colors.green[50],
+              color: Colors.black54,
               child: Column(
                 children: [
               Flexible(
@@ -44,12 +44,14 @@ class AddPetPage extends StatefulWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.green, width: 0.5),),
+                        border:  OutlineInputBorder(borderSide: BorderSide(color: Colors.yellow, width: 1),),
                         hintText: 'alias',
                         helperText: "here put pet's alias like Salem",
                         helperMaxLines: 2,
+                        hintStyle: TextStyle(color: Colors.yellow[200]),
+                        helperStyle: TextStyle(color: Colors.yellow[200])
                       ),
-                      onFieldSubmitted: (str) { setState(() {_pet.alias = str;});},
+                      onChanged: (str) { setState(() {_pet.alias = str;});},
                     ),
                   )
               ),
@@ -59,12 +61,14 @@ class AddPetPage extends StatefulWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.green, width: 0.5),),
+                        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.yellow, width: 0.5),),
                         hintText: 'hashtag',
                         helperText: 'put in unique hashtag of pet like #salem_coolest_cat_ever',
                         helperMaxLines: 2,
+                        hintStyle: TextStyle(color: Colors.yellow[200]),
+                        helperStyle: TextStyle(color: Colors.yellow[200])
                       ),
-                      onFieldSubmitted: (str) { setState(() {_pet.hashtag = str;});},
+                      onChanged: (str) { setState(() {_pet.hashtag = str;});},
                     ),
                   )
               ),
@@ -78,8 +82,10 @@ class AddPetPage extends StatefulWidget {
                         hintText: 'type',
                         helperText: 'here put type of pet like cat or dog',
                         helperMaxLines: 2,
+                        hintStyle: TextStyle(color: Colors.yellow[200]),
+                        helperStyle: TextStyle(color: Colors.yellow[200])
                       ),
-                      onFieldSubmitted: (str) { setState(() {_pet.type = str.toLowerCase();});},
+                      onChanged: (str) { setState(() {_pet.type = str.toLowerCase();});},
                     ),
                   )
               ),
@@ -93,8 +99,10 @@ class AddPetPage extends StatefulWidget {
                         hintText: 'subtype',
                         helperText: "put in pet's breed or just skip it",
                         helperMaxLines: 2,
+                        hintStyle: TextStyle(color: Colors.yellow[200]),
+                        helperStyle: TextStyle(color: Colors.yellow[200])
                       ),
-                      onFieldSubmitted: (str) { setState(() {_pet.subtype = str;});},
+                      onChanged: (str) { setState(() {_pet.subtype = str;});},
                     ),
                   )
               ),
@@ -108,16 +116,18 @@ class AddPetPage extends StatefulWidget {
                         hintText: 'bio',
                         helperText: "put in pet's biography or just skip it",
                         helperMaxLines: 2,
+                        hintStyle: TextStyle(color: Colors.yellow[200]),
+                        helperStyle: TextStyle(color: Colors.yellow[200])
                       ),
-                      onFieldSubmitted: (str) { setState(() {_pet.bio = str;});},
+                      onChanged: (str) { setState(() {_pet.bio = str;});},
                     ),
                   )
               ) 
               ]),
           ),
           floatingActionButton: IconButton(
-            icon: Icon(Icons.done, color: Colors.brown[600],), 
-            splashColor: Colors.white,
+            icon: Icon(Icons.done, color: Colors.yellow,), 
+            hoverColor: Colors.yellow,
             onPressed: () {createpet();}),
       ),
     );

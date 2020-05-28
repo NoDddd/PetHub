@@ -13,7 +13,7 @@ Random random = new Random();
   Widget build(BuildContext contex) {
     return Column(
         children: [
-        Expanded(child: Center(child: Icon(Icons.add_box, size: 110.0)), flex: 1),
+        Expanded(child: Center(child: Icon(Icons.add_box, size: 110.0, color: Colors.yellow)), flex: 1),
         Expanded(child: Wrap(
           spacing: 5.0,
           children: [

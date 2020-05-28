@@ -44,7 +44,7 @@ class _SomeoneProfilePageState extends State<SomeoneProfilePage> {
         child: Column(
           children: <Widget>[
             Flexible(flex: 1,
-            child: Text(widget._user.nickname, textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'Cinzel'),), 
+            child: Text(widget._user.nickname, textAlign: TextAlign.center, style: TextStyle(color: Colors.yellow, fontSize: 20, fontFamily: 'Cinzel'),), 
             ),
             Flexible(flex:  9,
             child: _pets == null ?
@@ -53,10 +53,10 @@ class _SomeoneProfilePageState extends State<SomeoneProfilePage> {
               itemCount: _pets.length,
               itemBuilder: (context, i) {
                 return ListTile(
-                  title: Text(_pets[i].alias, style: TextStyle(fontFamily: 'Cinzel', fontSize: 17)),
-                  leading: Icon(Icons.pets),
-                  subtitle: Text(_pets[i].type),
-                  trailing: Text(_pets[i].hashtag),
+                  title: Text(_pets[i].alias, style: TextStyle(fontFamily: 'Cinzel', fontSize: 17, color: Colors.yellow)),
+                  leading: Icon(Icons.pets, color: Colors.yellowAccent[100]),
+                  subtitle: Text(_pets[i].type, style: TextStyle(color: Colors.yellow),),
+                  trailing: Text(_pets[i].hashtag, style: TextStyle(color: Colors.yellow)),
                 );
               }
               ),

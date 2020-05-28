@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         children: <Widget>[
           Flexible(flex: 1,
-          child: Text(widget._user.nickname, textAlign: TextAlign.center, style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'Cinzel'),), 
+          child: Text(widget._user.nickname, textAlign: TextAlign.center, style: TextStyle(color: Colors.yellowAccent, fontSize: 22, fontFamily: 'Cinzel'),), 
           ),
           Flexible(flex:  9,
           child: widget._pets == null ?
@@ -34,16 +34,16 @@ class _ProfilePageState extends State<ProfilePage> {
             itemCount: widget._pets.length,
             itemBuilder: (context, i) {
               return ListTile(
-                title: Text(widget._pets[i].alias, style: TextStyle(fontFamily: 'Cinzel', fontSize: 17)),
-                leading: Icon(Icons.pets),
-                subtitle: Text(widget._pets[i].type),
-                trailing: Text(widget._pets[i].hashtag),
+                title: Text(widget._pets[i].alias, style: TextStyle(fontFamily: 'Cinzel', fontSize: 17, color: Colors.yellow)),
+                leading: Icon(Icons.pets, color: Colors.yellowAccent[100]),
+                subtitle: Text(widget._pets[i].type, style: TextStyle(color: Colors.yellow)),
+                trailing: Text(widget._pets[i].hashtag, style: TextStyle(color: Colors.yellow)),
               );
             }
             ),
           ),
           Flexible(flex: 1, 
-          child: IconButton(icon: Icon(Icons.cancel), iconSize: 50, onPressed: () {signInGoogle.signOut();},),
+          child: IconButton(icon: Icon(Icons.cancel, color: Colors.yellow), iconSize: 50, onPressed: () {signInGoogle.signOut();},),
           ),
         ],
       )      

@@ -59,7 +59,7 @@ class SearchPage extends StatefulWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.yellow[500],
-            leading: Icon(Icons.search),
+            leading: IconButton(icon: Icon(Icons.arrow_back, color: Colors.black), onPressed: (){Navigator.of(context).pop();}),
             title: TextFormField(
               controller: search_text_contrl,
               decoration: InputDecoration(
@@ -72,15 +72,15 @@ class SearchPage extends StatefulWidget {
             ),
             actions: <Widget>[
               IconButton(
-                icon: Icon(Icons.highlight_off),
+                icon: Icon(Icons.highlight_off, color: Colors.black),
                 onPressed: () {clean_search();},
               )
             ],
           ),
           body: Container(
-            color: Colors.green[50],
+            color: Colors.black87,
             child: result_users == null ?
-            Center(child: Text('PetHub', style: TextStyle(color: Colors.black12, fontSize: 80),)) :
+            Center(child: Text('PetHub', style: TextStyle(color: Colors.yellow, fontSize: 80),)) :
             ListView.builder(
               itemCount: result_users.length,
               itemBuilder: (context, i) {
@@ -88,7 +88,7 @@ class SearchPage extends StatefulWidget {
                   padding: EdgeInsets.fromLTRB(1, 5, 5, 5),
                   child: ListTile(
                     leading: Icon(Icons.person_pin),
-                    title: Text(result_users[i].nickname, style: TextStyle(color: Colors.green[950], fontSize: 17), textAlign: TextAlign.center),
+                    title: Text(result_users[i].nickname, style: TextStyle(color: Colors.yellow[600], fontSize: 17), textAlign: TextAlign.center),
                     onTap: () async {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => SomeoneProfilePage(result_users[i])));
                     },

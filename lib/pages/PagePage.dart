@@ -14,16 +14,13 @@ int iconindex = 0;
   @override 
   Widget build(BuildContext contex) {
     return Container(
-      child: ListWheelScrollView(
-        //padding: EdgeInsets.only(bottom: 10),
+      child: ListView(
+        padding: EdgeInsets.only(bottom: 10),
         itemExtent: 0.67 * MediaQuery.of(context).size.height,
-        diameterRatio: 9,
-        renderChildrenOutsideViewport: false,
-        offAxisFraction: -0.5,
-        children: [
-          for( var i = 0; i < 13; i++)
+        children: [   
+          for (var i = 0; i < 13; i++)    
           Container(
-            decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.greenAccent[700], Colors.green[50], Colors.white],
+            decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.yellow, Colors.black],
             begin: Alignment.topCenter, end: Alignment.bottomCenter)          ),
             width: MediaQuery.of(context).size.width - 20,
             child: Column(children: <Widget>[
@@ -39,29 +36,9 @@ int iconindex = 0;
               Expanded(child: Align(child: Icon(Icons.favorite, color: Colors.redAccent[700], size: 30,),
               alignment: Alignment.centerRight,), flex: 1)
             ],)
-            ),
-          Expanded(child: Column(children: <Widget>[
-            Expanded(child: Align(
-              child: IconButton(
-                highlightColor: Colors.green,
-                hoverColor: Colors.blue,
-                color: Colors.green,
-                icon: Icon(Icons.add, color: Colors.green), onPressed: () {  },
-              ),
-                alignment: Alignment.center,widthFactor: 0.8,), flex: 1),
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Text(
-                "View More Posts",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],)
-          )
-        ])
+            )
+        ]
+        )
         );
   }
 }

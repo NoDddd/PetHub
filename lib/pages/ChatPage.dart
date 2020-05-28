@@ -12,11 +12,18 @@ class _ChatPageState extends State<ChatPage> {
   @override 
   Widget build(BuildContext contex) {
     return ListView(
+      
         children: <Widget>[
           for (var i = 0; i < 7; i++) 
           Column(children: [
-          ListTile(leading: Icon(Icons.chat_bubble_outline), title: Text('person $i'), trailing: Icon(Icons.pets), subtitle: Text('last messege from person $i', textScaleFactor: .6,),),
-          Divider(color: Colors.red, height: 7, thickness: 2,)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 15),
+            child: ListTile(leading: Icon(Icons.chat_bubble_outline), 
+            title: Text('person $i', style: TextStyle(color: Colors.yellow)), 
+            trailing: Icon(Icons.pets, color: Colors.yellow[300]), 
+            ),
+          ),
+          Divider(color: Colors.yellow, height: 7, thickness: 2,)
           ])
         ],
     );

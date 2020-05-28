@@ -29,14 +29,13 @@ class AnimalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
           return Container(
-            color: Colors.green,
+            color: Colors.yellow,
             height: double.infinity,
             child: Column( 
             children: [
-              Expanded(flex: 1, child: SizedBox(height: 100, child: Center(child: Text('Some random animals for U', style: TextStyle(letterSpacing: 1.1, fontSize: 17, fontWeight: FontWeight.w500, color: Colors.white)),))),
-              Expanded(flex: 10, child: Container(decoration: BoxDecoration(color: Colors.white, 
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))),
-            child: ListView(children: <Widget>[    
+              Expanded(flex: 1, child: SizedBox(height: 100, child: Center(child: Text('Some random animals for U', style: TextStyle(letterSpacing: 1.1, fontSize: 17, fontWeight: FontWeight.w500, color: Colors.black)),))),
+              Expanded(flex: 10, child: Container(color: Colors.black87,
+              child: ListView(children: <Widget>[    
                 FutureBuilder(
                   future: getcat(),
                   builder: (context, snapshot) {
