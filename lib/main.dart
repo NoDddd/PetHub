@@ -1,31 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import './pages/MainPage.dart';
 
-import 'package:flutter/services.dart';
+// функція запуску програми
+void main(){
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown,DeviceOrientation.portraitUp]);
+  runApp(MyApp());
+  }
 
-void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
     return MaterialApp(
       title: 'PetHub',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: Colors.black87,
+        appBarTheme: AppBarTheme(
+          color: Colors.yellow
+        ),
+        scaffoldBackgroundColor: _black[70],
+        fontFamily: 'Cinzel',
+        iconTheme: IconThemeData(color: _black),
         backgroundColor: Colors.black12,
           bottomAppBarColor:Colors.black,
-        primarySwatch: Colors.yellow,
-        fontFamily: 'Cinzel'
+        
       ),
       home: MainPage(),
     );
   }
 }
-// hello
 
 
-
+MaterialColor _black = new MaterialColor(
+  0xFF000000,
+  {
+    70: Color(0xC0000000)
+  }
+);

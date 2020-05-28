@@ -48,17 +48,17 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   User _user;
   List<Pet> _pets;
-  bool _is_sign_in = true;
+  bool _is_sign_in = false;
   int _selected_index = 0;
   PageController pages_control;
   void initState() {
     super.initState();
     pages_control = new PageController();
 
-/*    try {
+    try {
       signInGoogle.onCurrentUserChanged.listen((account) {_check_google_signin(account);setState( (){_selected_index = 0;});});
     }
-    catch(e) {}*/
+    catch(e) {}
 /*
     try{
       signInGoogle.
@@ -106,7 +106,7 @@ class _MainPageState extends State<MainPage> {
       pets.add(Pet.fromDoc(i));
     }
     setState(() {
-      _pets = pets;
+      _pets = pets; 
     });
   }
 
@@ -121,35 +121,50 @@ class _MainPageState extends State<MainPage> {
   Widget signinpage() {
     Size size = MediaQuery.of(context).size;
     return
-      Container (
-          height: size.height,
-          width: size.width,
-          color: Colors.black,
-          child: Stack(
-            children: <Widget>[
-              Align(
-                  alignment:  Alignment(0,-0.55),
-                  child: ColorizeAnimatedTextKit(
-                      totalRepeatCount: 1,
-                      speed: Duration(milliseconds: 1500),
-                      text: ['PetHub'],
-                      textStyle: TextStyle(fontSize: 80, fontFamily: 'Cinzel', fontWeight: FontWeight.w300, fontStyle: FontStyle.normal ),
-                      colors: [Colors.white, Colors.white70, Colors.white54, Colors.white24, Colors.white10, Colors.black]
-                  )
+    Container (
+      height: size.height,
+      width: size.width,
+      color: Colors.black87,
+      child: Column(
+        children: <Widget>[  
+          Flexible(flex: 1, child: Container()),
+          Flexible(
+          flex: 3,
+          child: ColorizeAnimatedTextKit(
+            totalRepeatCount: 1,
+            speed: Duration(milliseconds: 1500),
+            text: ['PetHub'], 
+            textStyle: TextStyle(fontSize: 80, fontFamily: 'Cinzel', fontWeight: FontWeight.w300, fontStyle: FontStyle.normal ),
+            colors: [Colors.yellowAccent, Colors.yellow, Colors.yellow[800], Colors.lime[900], Colors.black]
+            )
+          ),
+          Flexible(flex: 1, child: Container()),
+          Flexible(flex: 2, child: Align(
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.yellow[200]),
+                borderRadius: BorderRadius.circular(11)
               ),
+            ))),
+            Flexible(flex: 2, child: Align(
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.yellow[200]),
+                borderRadius: BorderRadius.circular(11)
+              ),
+            ))),
+          Flexible (
+          flex: 2,
+          child: GestureDetector(
+                onTap: () {logIn();},
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  child: Container(
+                    height: 40,
+                    width: 180,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(image: AssetImage('assets/sign-in-with-google.png'), fit:  BoxFit.fill)
 
-              Align (
-                alignment: Alignment(0,0.45),
-                child: GestureDetector(
-                  onTap: () {logIn();},
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    child: Container(
-                      height: 40,
-                      width: 180,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(image: AssetImage('assets/sign-in-with-google.png'), fit:  BoxFit.fill)
-                      ),
                     ),
                   ),
                 ),
@@ -164,9 +179,10 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     if (!_is_sign_in) return signinpage();
-    else {
-      return Scaffold(
-        appBar: AppBar(title: Text('PetHub', style: TextStyle(color: Colors.indigo[900]),),
+    else return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: Text('PetHub', style: TextStyle(color: Colors.indigo[900]),), 
+
           leading: Icon(Icons.pets),
           actions: <Widget>[IconButton(icon: Icon(Icons.search), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage(usersRef)));},)],
         ),
@@ -183,7 +199,6 @@ class _MainPageState extends State<MainPage> {
           ],
           onPageChanged: (changed) {setState(() {_selected_index = changed;});},
         ),
-
         bottomNavigationBar:  BottomNavyBar(
           selectedIndex:  _selected_index,
           showElevation: true, // use this to remove appBar's elevation
@@ -199,12 +214,12 @@ class _MainPageState extends State<MainPage> {
             ),
             BottomNavyBarItem(
                 icon: Icon(Icons.add_a_photo),
-                title: Text('Photos'),
+                title: Text('Add Post'),
                 activeColor: Colors.yellow
             ),
             BottomNavyBarItem(
                 icon: Icon(Icons.message),
-                title: Text('Messages'),
+                title: Text('Chat'),
                 activeColor: Colors.yellow
             ),
             BottomNavyBarItem(
@@ -240,8 +255,6 @@ class _MainPageState extends State<MainPage> {
         ) ,
     );
     }
-
-
 
   }
 }
