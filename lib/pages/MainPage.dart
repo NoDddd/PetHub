@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:flip_box_bar/flip_box_bar.dart';
-
-import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 import 'package:animated_text_kit/animated_text_kit.dart' show ColorizeAnimatedTextKit;
@@ -150,7 +146,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             widthFactor: 0.8,
-            heightFactor: 0.6,
+            heightFactor: 0.7,
             )),
             Flexible(flex: 2, 
             child: FractionallySizedBox(
@@ -162,7 +158,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
             widthFactor: 0.8,
-            heightFactor: 0.6,
+            heightFactor: 0.7,
             )),
           Flexible (
           flex: 2,
