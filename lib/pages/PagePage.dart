@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:math' show Random;
-import 'package:flip_box_bar/flip_box_bar.dart';
 
 class PagePage extends StatefulWidget {
   @override
@@ -47,7 +46,7 @@ int iconindex = 0;
                 highlightColor: Colors.green,
                 hoverColor: Colors.blue,
                 color: Colors.green,
-                icon: Icon(Icons.add, color: Colors.green),
+                icon: Icon(Icons.add, color: Colors.green), onPressed: () {  },
               ),
                 alignment: Alignment.center,widthFactor: 0.8,), flex: 1),
             Padding(
