@@ -89,7 +89,7 @@ class _MainPageState extends State<MainPage> {
       pets.add(Pet.fromDoc(i));
     }
     setState(() {
-      _pets = pets;
+      _pets = pets; 
     });
   }
 
@@ -107,22 +107,37 @@ class _MainPageState extends State<MainPage> {
     Container (
       height: size.height,
       width: size.width,
-      color: Colors.black,
-      child: Stack(
+      color: Colors.black87,
+      child: Column(
         children: <Widget>[  
-          Align(
-          alignment:  Alignment(0,-0.55),
+          Flexible(flex: 1, child: Container()),
+          Flexible(
+          flex: 3,
           child: ColorizeAnimatedTextKit(
             totalRepeatCount: 1,
             speed: Duration(milliseconds: 1500),
             text: ['PetHub'], 
             textStyle: TextStyle(fontSize: 80, fontFamily: 'Cinzel', fontWeight: FontWeight.w300, fontStyle: FontStyle.normal ),
-            colors: [Colors.white, Colors.white70, Colors.white54, Colors.white24, Colors.white10, Colors.black]
+            colors: [Colors.yellowAccent, Colors.yellow, Colors.yellow[800], Colors.lime[900], Colors.black]
             )
           ),
-          
-          Align (
-          alignment: Alignment(0,0.45),
+          Flexible(flex: 1, child: Container()),
+          Flexible(flex: 2, child: Align(
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.yellow[200]),
+                borderRadius: BorderRadius.circular(11)
+              ),
+            ))),
+            Flexible(flex: 2, child: Align(
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.yellow[200]),
+                borderRadius: BorderRadius.circular(11)
+              ),
+            ))),
+          Flexible (
+          flex: 2,
           child: GestureDetector(
                 onTap: () {logIn();},
                 child: ClipRRect(
@@ -144,85 +159,87 @@ class _MainPageState extends State<MainPage> {
   @override 
   Widget build(BuildContext context) {
     if (!_is_sign_in) return signinpage();
-    else return Scaffold(
-      appBar: AppBar(title: Text('PetHub', style: TextStyle(color: Colors.indigo[900]),), 
-        leading: Icon(Icons.pets),
-        actions: <Widget>[IconButton(icon: Icon(Icons.search), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage(usersRef)));},)],
-      ),
+    else return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: Text('PetHub', style: TextStyle(color: Colors.indigo[900]),), 
+          leading: Icon(Icons.pets),
+          actions: <Widget>[IconButton(icon: Icon(Icons.search), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage(usersRef)));},)],
+        ),
 
-      body: PageView(
-        controller: pages_control,
-        physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          PagePage(),
-          PostPage(),
-          ChatPage(),
-          ProfilePage(_user, _pets),
-          AnimalPage()
-        ],
-        onPageChanged: (changed) {setState(() {_selected_index = changed;});},
-      ),
-
-      bottomNavigationBar: Container(
-        height: MediaQuery.of(context).size.height / 10,
-        width: MediaQuery.of(context).size.width,
-        child: SafeArea(
-          child: GNav(
-            iconSize: 25,
-            duration: Duration(milliseconds: 500),
-            selectedIndex: _selected_index,
-            tabs: [
-            GButton(
-              icon: Icons.home, 
-              text: 'Kennel',
-              backgroundColor: Colors.pink[200],
-              ),
-            GButton(
-              icon: Icons.add_box, 
-              text: 'Post Pet',
-              backgroundColor: Colors.pink[200],
-              ),
-            GButton(
-              icon: Icons.message, 
-              text: 'Petchat',
-              backgroundColor: Colors.pink[200],
-              ),
-            GButton(
-              icon: Icons.person, 
-              text: 'Petfile',
-              backgroundColor: Colors.pink[200],
-              ),
-            GButton(
-              icon: Icons.pets, 
-              text: 'RandPet',
-              backgroundColor: Colors.pink[200],
-              ),
+        body: PageView(
+          controller: pages_control,
+          physics: NeverScrollableScrollPhysics(),
+          children: <Widget>[
+            PagePage(),
+            PostPage(),
+            ChatPage(),
+            ProfilePage(_user, _pets),
+            AnimalPage()
           ],
-          onTabChange: (int new_index) {
-            setState((){_selected_index = new_index;});
-            pages_control.animateToPage(new_index, duration: Duration(milliseconds: 500), curve: Curves.ease);
-          }, 
+          onPageChanged: (changed) {setState(() {_selected_index = changed;});},
+        ),
+
+        bottomNavigationBar: Container(
+          height: MediaQuery.of(context).size.height / 10,
+          width: MediaQuery.of(context).size.width,
+          child: SafeArea(
+            child: GNav(
+              iconSize: 25,
+              duration: Duration(milliseconds: 500),
+              selectedIndex: _selected_index,
+              tabs: [
+              GButton(
+                icon: Icons.home, 
+                text: 'Kennel',
+                backgroundColor: Colors.pink[200],
+                ),
+              GButton(
+                icon: Icons.add_box, 
+                text: 'Post Pet',
+                backgroundColor: Colors.pink[200],
+                ),
+              GButton(
+                icon: Icons.message, 
+                text: 'Petchat',
+                backgroundColor: Colors.pink[200],
+                ),
+              GButton(
+                icon: Icons.person, 
+                text: 'Petfile',
+                backgroundColor: Colors.pink[200],
+                ),
+              GButton(
+                icon: Icons.pets, 
+                text: 'RandPet',
+                backgroundColor: Colors.pink[200],
+                ),
+            ],
+            onTabChange: (int new_index) {
+              setState((){_selected_index = new_index;});
+              pages_control.animateToPage(new_index, duration: Duration(milliseconds: 500), curve: Curves.ease);
+            }, 
+            ),
           ),
         ),
+        floatingActionButton: _selected_index != 3 ? null :
+        IconButton(
+          highlightColor: Colors.green,
+          hoverColor: Colors.blue,
+          color: Colors.green,
+          icon: Icon(Icons.add, color: Colors.green), 
+          onPressed: () async {
+            Pet pet = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddPetPage()));
+            petsRef.document(pet.hashtag).setData({
+              'hashtag': pet.hashtag,
+              'alias': pet.alias,
+              'type': pet.type,
+              'subtype': pet.subtype,
+              'bio': pet.bio
+            });
+            get_pets();
+          }
+        ) ,
       ),
-      floatingActionButton: _selected_index != 3 ? null :
-      IconButton(
-        highlightColor: Colors.green,
-        hoverColor: Colors.blue,
-        color: Colors.green,
-        icon: Icon(Icons.add, color: Colors.green), 
-        onPressed: () async {
-          Pet pet = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddPetPage()));
-          petsRef.document(pet.hashtag).setData({
-            'hashtag': pet.hashtag,
-            'alias': pet.alias,
-            'type': pet.type,
-            'subtype': pet.subtype,
-            'bio': pet.bio
-          });
-          get_pets();
-        }
-      ) ,
     );
 
 

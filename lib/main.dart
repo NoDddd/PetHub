@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import './pages/MainPage.dart';
 // функція запуску програми
-void main() => runApp(MyApp());
+void main(){
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown,DeviceOrientation.portraitUp]);
+  runApp(MyApp());
+  }
 
 class MyApp extends StatelessWidget {
   @override
@@ -10,8 +15,13 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
-        fontFamily: 'Cinzel'
+        primaryColor: Colors.black87,
+        appBarTheme: AppBarTheme(
+          color: Colors.yellow
+        ),
+        scaffoldBackgroundColor: _black[70],
+        fontFamily: 'Cinzel',
+        iconTheme: IconThemeData(color: _black),
       ),
       home: MainPage(),
     );
@@ -19,5 +29,9 @@ class MyApp extends StatelessWidget {
 }
 // hello
 
-
-
+MaterialColor _black = new MaterialColor(
+  0xFF000000,
+  {
+    70: Color(0xC0000000)
+  }
+);
