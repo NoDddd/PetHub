@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 //import 'package:flip_box_bar/flip_box_bar.dart';
+
+import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+
 import 'package:animated_text_kit/animated_text_kit.dart' show ColorizeAnimatedTextKit;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:tvarinki/models/pet.dart';
 import 'package:tvarinki/models/user.dart';
@@ -24,6 +30,17 @@ CollectionReference petsRef;
 
 
 class MainPage extends StatefulWidget {
+
+
+
+
+  MainPage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+
+
+
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -31,21 +48,21 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   User _user;
   List<Pet> _pets;
-  bool _is_sign_in = false;
-  int _selected_index = 0; 
+  bool _is_sign_in = true;
+  int _selected_index = 0;
   PageController pages_control;
   void initState() {
     super.initState();
     pages_control = new PageController();
 
-    try {
-    signInGoogle.onCurrentUserChanged.listen((account) {_check_google_signin(account);setState( (){_selected_index = 0;});});
-    } 
-    catch(e) {}
+/*    try {
+      signInGoogle.onCurrentUserChanged.listen((account) {_check_google_signin(account);setState( (){_selected_index = 0;});});
+    }
+    catch(e) {}*/
 /*
     try{
       signInGoogle.
-      
+
       signInSilently(suppressErrors: false).then((account) {_check_google_signin(account);});
     }
     catch(e) {}*/
@@ -61,7 +78,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _user_from_firestore() async {
-    
+
     GoogleSignInAccount user_account = signInGoogle.currentUser;
     DocumentSnapshot doc_snapshot = await usersRef.document(user_account.id).get();
 
@@ -100,136 +117,131 @@ class _MainPageState extends State<MainPage> {
     }
     else setState(() { _is_sign_in = false;});
   }
- // логін сторінка
+  // логін сторінка
   Widget signinpage() {
     Size size = MediaQuery.of(context).size;
     return
-    Container (
-      height: size.height,
-      width: size.width,
-      color: Colors.black,
-      child: Stack(
-        children: <Widget>[  
-          Align(
-          alignment:  Alignment(0,-0.55),
-          child: ColorizeAnimatedTextKit(
-            totalRepeatCount: 1,
-            speed: Duration(milliseconds: 1500),
-            text: ['PetHub'], 
-            textStyle: TextStyle(fontSize: 80, fontFamily: 'Cinzel', fontWeight: FontWeight.w300, fontStyle: FontStyle.normal ),
-            colors: [Colors.white, Colors.white70, Colors.white54, Colors.white24, Colors.white10, Colors.black]
-            )
-          ),
-          
-          Align (
-          alignment: Alignment(0,0.45),
-          child: GestureDetector(
-                onTap: () {logIn();},
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  child: Container(
-                    height: 40,
-                    width: 180,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(image: AssetImage('assets/sign-in-with-google.png'), fit:  BoxFit.fill)
+      Container (
+          height: size.height,
+          width: size.width,
+          color: Colors.black,
+          child: Stack(
+            children: <Widget>[
+              Align(
+                  alignment:  Alignment(0,-0.55),
+                  child: ColorizeAnimatedTextKit(
+                      totalRepeatCount: 1,
+                      speed: Duration(milliseconds: 1500),
+                      text: ['PetHub'],
+                      textStyle: TextStyle(fontSize: 80, fontFamily: 'Cinzel', fontWeight: FontWeight.w300, fontStyle: FontStyle.normal ),
+                      colors: [Colors.white, Colors.white70, Colors.white54, Colors.white24, Colors.white10, Colors.black]
+                  )
+              ),
+
+              Align (
+                alignment: Alignment(0,0.45),
+                child: GestureDetector(
+                  onTap: () {logIn();},
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    child: Container(
+                      height: 40,
+                      width: 180,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(image: AssetImage('assets/sign-in-with-google.png'), fit:  BoxFit.fill)
+                      ),
                     ),
                   ),
                 ),
-              ),
-         )
-      ],)
-    );
+              )
+            ],)
+      );
   }
-     // основна частина програми
-  @override 
+
+
+
+  // основна частина програми
+  @override
   Widget build(BuildContext context) {
     if (!_is_sign_in) return signinpage();
-    else return Scaffold(
-      appBar: AppBar(title: Text('PetHub', style: TextStyle(color: Colors.indigo[900]),), 
-        leading: Icon(Icons.pets),
-        actions: <Widget>[IconButton(icon: Icon(Icons.search), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage(usersRef)));},)],
-      ),
-
-      body: PageView(
-        controller: pages_control,
-        physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          PagePage(),
-          PostPage(),
-          ChatPage(),
-          ProfilePage(_user, _pets),
-          AnimalPage()
-        ],
-        onPageChanged: (changed) {setState(() {_selected_index = changed;});},
-      ),
-
-      bottomNavigationBar: Container(
-        height: MediaQuery.of(context).size.height / 10,
-        width: MediaQuery.of(context).size.width,
-        child: SafeArea(
-          child: GNav(
-            iconSize: 25,
-            duration: Duration(milliseconds: 500),
-            selectedIndex: _selected_index,
-            tabs: [
-            GButton(
-              icon: Icons.home, 
-              text: 'Kennel',
-              backgroundColor: Colors.pink[200],
-              ),
-            GButton(
-              icon: Icons.add_box, 
-              text: 'Post Pet',
-              backgroundColor: Colors.pink[200],
-              ),
-            GButton(
-              icon: Icons.message, 
-              text: 'Petchat',
-              backgroundColor: Colors.pink[200],
-              ),
-            GButton(
-              icon: Icons.person, 
-              text: 'Petfile',
-              backgroundColor: Colors.pink[200],
-              ),
-            GButton(
-              icon: Icons.pets, 
-              text: 'RandPet',
-              backgroundColor: Colors.pink[200],
-              ),
-          ],
-          onTabChange: (int new_index) {
-            setState((){_selected_index = new_index;});
-            pages_control.animateToPage(new_index, duration: Duration(milliseconds: 500), curve: Curves.ease);
-          }, 
-          ),
+    else {
+      return Scaffold(
+        appBar: AppBar(title: Text('PetHub', style: TextStyle(color: Colors.indigo[900]),),
+          leading: Icon(Icons.pets),
+          actions: <Widget>[IconButton(icon: Icon(Icons.search), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage(usersRef)));},)],
         ),
-      ),
-      floatingActionButton: _selected_index != 3 ? null :
-      IconButton(
-        highlightColor: Colors.green,
-        hoverColor: Colors.blue,
-        color: Colors.green,
-        icon: Icon(Icons.add, color: Colors.green), 
-        onPressed: () async {
-          Pet pet = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddPetPage()));
-          petsRef.document(pet.hashtag).setData({
-            'hashtag': pet.hashtag,
-            'alias': pet.alias,
-            'type': pet.type,
-            'subtype': pet.subtype,
-            'bio': pet.bio
-          });
-          get_pets();
-        }
-      ) ,
+
+        body: PageView(
+          controller: pages_control,
+          physics: NeverScrollableScrollPhysics(),
+          children: <Widget>[
+            PagePage(),
+            PostPage(),
+            ChatPage(),
+            ProfilePage(_user, _pets),
+            AnimalPage()
+          ],
+          onPageChanged: (changed) {setState(() {_selected_index = changed;});},
+        ),
+
+        bottomNavigationBar:  BottomNavyBar(
+          selectedIndex:  _selected_index,
+          showElevation: true, // use this to remove appBar's elevation
+          onItemSelected: (index) => setState(() {
+            _selected_index = index;
+            pages_control.jumpToPage(index);
+          }),
+          items: [
+            BottomNavyBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Home'),
+              activeColor: Colors.yellow,
+            ),
+            BottomNavyBarItem(
+                icon: Icon(Icons.add_a_photo),
+                title: Text('Photos'),
+                activeColor: Colors.yellow
+            ),
+            BottomNavyBarItem(
+                icon: Icon(Icons.message),
+                title: Text('Messages'),
+                activeColor: Colors.yellow
+            ),
+            BottomNavyBarItem(
+                icon: Icon(Icons.person),
+                title: Text('Account'),
+                activeColor: Colors.yellow
+            ),
+            BottomNavyBarItem(
+                icon: Icon(Icons.fiber_new),
+                title: Text('Rand Pic'),
+                activeColor: Colors.yellow
+            ),
+          ],
+        ),
+
+        floatingActionButton: _selected_index != 3 ? null :
+        IconButton(
+            highlightColor: Colors.green,
+            hoverColor: Colors.blue,
+            color: Colors.green,
+            icon: Icon(Icons.add, color: Colors.green),
+            onPressed: () async {
+              Pet pet = await Navigator.push(context, MaterialPageRoute(builder: (context) => AddPetPage()));
+              petsRef.document(pet.hashtag).setData({
+                'hashtag': pet.hashtag,
+                'alias': pet.alias,
+                'type': pet.type,
+                'subtype': pet.subtype,
+                'bio': pet.bio
+              });
+              get_pets();
+            }
+        ) ,
     );
+    }
 
 
-  
+
   }
 }
-
-
-
-  

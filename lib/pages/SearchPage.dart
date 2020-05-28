@@ -58,13 +58,13 @@ class SearchPage extends StatefulWidget {
       return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.greenAccent,
+            backgroundColor: Colors.yellow[500],
             leading: Icon(Icons.search),
             title: TextFormField(
               controller: search_text_contrl,
               decoration: InputDecoration(
                 hintText: 'search ...',
-                hintStyle: TextStyle(color: Colors.green),
+                hintStyle: TextStyle(color: Colors.black),
               ),
               onChanged: (changed) {
                 show_result(changed);
@@ -80,7 +80,7 @@ class SearchPage extends StatefulWidget {
           body: Container(
             color: Colors.green[50],
             child: result_users == null ?
-            Center(child: Text('PetHub', style: TextStyle(color: Colors.blue[200], fontSize: 80),)) :
+            Center(child: Text('PetHub', style: TextStyle(color: Colors.black12, fontSize: 80),)) :
             ListView.builder(
               itemCount: result_users.length,
               itemBuilder: (context, i) {
