@@ -168,7 +168,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
-              )
+              ))
             ],)
       );
   }
@@ -252,9 +252,9 @@ class _MainPageState extends State<MainPage> {
               });
               get_pets();
             }
-        ) ,
+        ),
+      )
     );
     }
 
-  }
 }

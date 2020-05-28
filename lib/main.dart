@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './pages/MainPage.dart';
-
 // функція запуску програми
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,12 +8,11 @@ void main(){
   runApp(MyApp());
   }
 
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'PetHub',
+      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.black87,
@@ -24,15 +22,12 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: _black[70],
         fontFamily: 'Cinzel',
         iconTheme: IconThemeData(color: _black),
-        backgroundColor: Colors.black12,
-          bottomAppBarColor:Colors.black,
-        
       ),
       home: MainPage(),
     );
   }
 }
-
+// hello
 
 MaterialColor _black = new MaterialColor(
   0xFF000000,
