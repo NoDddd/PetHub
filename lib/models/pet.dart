@@ -5,7 +5,6 @@ class Pet {
   String subtype;
   String hashtag;
   String bio;
-
   Pet ({
     this.alias,
     this.type,
@@ -20,7 +19,7 @@ class Pet {
     type: doc['type'],
     subtype: doc['subtype'],
     hashtag: doc['hashtag'],
-    bio: doc['bio']
+    bio: doc['bio'],
     );
   }
 }

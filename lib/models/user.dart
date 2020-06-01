@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 class User {
   String id;
-  String nickname = '';
+  String nickname;
   String profile;
   String email;
 
@@ -16,7 +16,7 @@ class User {
     return User(
       id: doc.documentID,
       nickname: doc['nickname'],
-      profile: doc['displayName'],
+      profile: doc['profile'],
       email: doc['email'],
     );
   }

@@ -1,5 +1,5 @@
-name: tvarinki
-description: A new Flutter project.
+name: PetHub
+description: Meow's course project.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -17,12 +17,16 @@ environment:
   sdk: ">=2.3.0 <3.0.0"
 
 dependencies:
-  flip_box_bar: ^0.9.2
+  image_picker: ^0.6.7
   http: ^0.12.1
   google_sign_in: ^4.4.6
   animated_text_kit: ^2.0.1
   cloud_firestore: ^0.13.5
+  firebase_auth: ^0.16.1
   bottom_navy_bar: ^5.4.0
+  uuid: ^2.0.4
+  path_provider: ^1.6.9
+  firebase_storage: ^3.1.6
   flutter:
     sdk: flutter
 
@@ -34,7 +38,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
+  flutter_launcher_icons: ^0.7.5
+flutter_icons:
+  image_path: assets/logo.jpg
+  android: true
+  ios: true
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -49,7 +57,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/sign-in-with-google.png
+    - assets/
+    
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -64,10 +73,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-      - family: Cinzel
+      - family: Martel
         fonts:
-          - asset: fonts/Cinzel-Regular.ttf
-            weight: 600
+          - asset: fonts/Martel-Regular.ttf
             style: normal
   #   - family: Trajan Pro
   #     fonts:

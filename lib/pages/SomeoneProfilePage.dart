@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tvarinki/models/pet.dart';
-import 'package:tvarinki/models/user.dart';
+import 'package:PetHub/models/pet.dart';
+import 'package:PetHub/models/user.dart';
 import './MainPage.dart' show firestore;
 
 
@@ -39,28 +40,61 @@ class _SomeoneProfilePageState extends State<SomeoneProfilePage> {
   Widget build(BuildContext contex) {
     return Scaffold(
       appBar: AppBar(title: Text('PetHub', style: TextStyle(color: Colors.indigo[900]),), 
-        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: () {Navigator.of(context).pop();},)), 
+        leading: IconButton(icon: Icon(Icons.arrow_back, color: Colors.black), onPressed: () {Navigator.of(context).pop();},)), 
       body: Container(
         child: Column(
           children: <Widget>[
             Flexible(flex: 1,
             child: Text(widget._user.nickname, textAlign: TextAlign.center, style: TextStyle(color: Colors.yellow, fontSize: 20, fontFamily: 'Cinzel'),), 
             ),
-            Flexible(flex:  9,
-            child: _pets == null ?
-            CircularProgressIndicator() :
-            ListView.builder(
-              itemCount: _pets.length,
-              itemBuilder: (context, i) {
-                return ListTile(
-                  title: Text(_pets[i].alias, style: TextStyle(fontFamily: 'Cinzel', fontSize: 17, color: Colors.yellow)),
-                  leading: Icon(Icons.pets, color: Colors.yellowAccent[100]),
-                  subtitle: Text(_pets[i].type, style: TextStyle(color: Colors.yellow),),
-                  trailing: Text(_pets[i].hashtag, style: TextStyle(color: Colors.yellow)),
-                );
-              }
+            Flexible(
+            flex: 1,
+            child: Container(
+                child: Text(widget._user.profile, textAlign: TextAlign.center, style: TextStyle(color: Colors.yellowAccent, fontSize: 10, fontFamily: 'Martel'),), 
               ),
             ),
+          Divider(color: Colors.yellow, thickness: 2,),
+          Flexible(
+          flex:  9,
+          child: _pets == null ?
+          CircularProgressIndicator() :
+          ListView.builder(
+            itemCount: _pets.length,
+            itemBuilder: (context, i) {
+              return 
+              Column(
+                children: <Widget>[
+                  ListTile(
+                    title: Text(_pets[i].alias, style: TextStyle(fontFamily: 'Cinzel', fontSize: 17, color: Colors.yellow)),
+                    leading: Icon(Icons.pets, color: Colors.yellowAccent[100]),
+                    subtitle: Text(_pets[i].type, style: TextStyle(color: Colors.yellow)),
+                    trailing: Text(_pets[i].hashtag, style: TextStyle(color: Colors.yellow)),
+                  ),
+                  Container(
+                  height: 100,
+                  child: FutureBuilder(
+                    future: Firestore.instance.collection('/users/'+ widget._user.id + '/pets/' + _pets[i].hashtag + '/posts').orderBy('time').getDocuments(),
+                    builder: (context, snapshots) {
+                      if (!snapshots.hasData)
+                      return Container(child: LinearProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.yellow)));
+                      else
+                      return ListView.builder(
+                        itemExtent: 100,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: snapshots.data.documents.length,
+                        itemBuilder: (context, j) {
+                          return Image.network(snapshots.data.documents[j]['url']);
+                        }
+                      );
+                    }
+                  )
+                  ),
+                  Divider(color: Colors.yellow.withOpacity(0.6), height: 10, thickness: 2),
+                ],
+              );
+            }
+            ),
+          ),
           ],
         )      
       ),

@@ -1,5 +1,10 @@
+import 'package:PetHub/models/post.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' show Random;
+
+import 'Post.dart';
+
+Firestore firestore = Firestore.instance;
 
 class PagePage extends StatefulWidget {
   @override
@@ -7,38 +12,27 @@ class PagePage extends StatefulWidget {
 }
 
 class _PagePageState extends State<PagePage> {
-Random random = new Random();
-String _text = 'content of post';
-List<Widget> icon = [Icon(Icons.favorite_border), Icon(Icons.favorite, color: Colors.redAccent[700])];
-int iconindex = 0;
+
   @override 
   Widget build(BuildContext contex) {
+    
     return Container(
-      child: ListView(
-        padding: EdgeInsets.only(bottom: 10),
-        itemExtent: 0.67 * MediaQuery.of(context).size.height,
-        children: [   
-          for (var i = 0; i < 13; i++)    
-          Container(
-            decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.yellow, Colors.black],
-            begin: Alignment.topCenter, end: Alignment.bottomCenter)          ),
-            width: MediaQuery.of(context).size.width - 20,
-            child: Column(children: <Widget>[
-              Expanded(child: Row(children: [
-                Expanded(child: Align(child: Icon(Icons.person_outline, color: Colors.white, size: 60), alignment: Alignment.centerLeft,widthFactor: 0.8,), flex: 1),
-                Expanded(child: Align(child: Icon(Icons.pets, color: Colors.white, size: 30), alignment: Alignment.centerRight,widthFactor: 0.8,), flex: 1)
-                ]), flex: 1),
-              Expanded(child: Align(child: Text('TITLE', textScaleFactor: 2,), alignment: Alignment.centerLeft, ), flex: 1),
-              Expanded(child: Align(child: Text('Subtitle and description\n and some text', textScaleFactor: 1,), alignment: Alignment.centerLeft),flex: 1),
-              Expanded(child: FractionallySizedBox(child:
-                Container(color: Color.fromARGB(255, random.nextInt(255), random.nextInt(255), random.nextInt(255)),
-                  child: FittedBox(child: Icon(Icons.pets), fit: BoxFit.contain)), widthFactor: 0.9, heightFactor: 0.97,), flex: 4),
-              Expanded(child: Align(child: Icon(Icons.favorite, color: Colors.redAccent[700], size: 30,),
-              alignment: Alignment.centerRight,), flex: 1)
-            ],)
-            )
-        ]
-        )
-        );
+      color: Colors.black,
+      child: StreamBuilder(
+        stream: firestore.collection('posts').orderBy('time').limit(25).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData || snapshot.hasError)
+          return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.yellow),));          
+          else return ListView.builder(
+            itemCount: snapshot.data.documents.length,
+            itemExtent: MediaQuery.of(context).size.height * .8,
+            itemBuilder: (context, i) {
+              return PostWidget(Post.fromDoc(snapshot.data.documents[i]));
+            },
+          );
+        },
+      )
+    );
+        
   }
 }

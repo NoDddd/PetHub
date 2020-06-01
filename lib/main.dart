@@ -5,10 +5,10 @@ import './pages/MainPage.dart';
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown,DeviceOrientation.portraitUp]);
-  runApp(MyApp());
+  runApp(PetHub());
   }
 
-class MyApp extends StatelessWidget {
+class PetHub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           color: Colors.yellow
         ),
         scaffoldBackgroundColor: _black[70],
-        fontFamily: 'Cinzel',
+        fontFamily: 'Martel',
         bottomAppBarColor: Colors.black,
       ),
       home: MainPage(),

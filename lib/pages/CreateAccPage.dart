@@ -7,13 +7,18 @@ class CreateAccPage extends StatefulWidget {
   }
   
   class _StateCreateAccPage extends State<CreateAccPage> {
+    GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
     String username;
     SnackBar error_bar = SnackBar(content: Text('Error input for username', style: TextStyle(color: Colors.red[700])), duration: Duration(seconds: 3),);
     
 
     void createacc() {
-      if (username == '' || username.length < 6 || username.length > 13 || username == null) {
-        
+      if (username.isEmpty || username.length < 6 || username == null) {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(
+          duration: Duration(seconds: 3,),
+          content: Text('Enter correct username', style: TextStyle(color: Colors.redAccent[700])),
+          backgroundColor: Colors.yellow,
+          ));
       }
       else Navigator.of(context).pop(username);
     }
@@ -21,6 +26,7 @@ class CreateAccPage extends StatefulWidget {
   Widget build (BuildContext context) {
     return SafeArea(
           child: Scaffold(
+            key: _scaffoldKey,
             appBar: AppBar(leading: FittedBox(child: Icon(Icons.pets, color: Colors.black), fit: BoxFit.fitWidth), title: Text('Account Settings', style: TextStyle(color: Colors.black)), backgroundColor: Colors.yellow,),
             body: Container(
               width: double.infinity,
@@ -44,14 +50,21 @@ class CreateAccPage extends StatefulWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
+                      style: TextStyle(color: Colors.yellow),
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide(color: Colors.yellow, width: 1),),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.yellow, width: 1, style: BorderStyle.solid),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.yellow, width: 1, style: BorderStyle.solid),
+                        ),
                         hintText: 'username',
-                        helperText: 'must contain at least 6 symbols, but not more that 13',
+                        helperText: 'must contain at least 6 symbols',
                         helperMaxLines: 2,
                         hintStyle: TextStyle(color: Colors.yellow[200]),
                         helperStyle: TextStyle(color: Colors.yellow[200])
                       ),
+                      maxLength: 20,
                       onChanged: (str) { setState(() {username = str;});},
                     ),
                   )
