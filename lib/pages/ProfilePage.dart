@@ -1,8 +1,11 @@
+import 'package:PetHub/models/post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:PetHub/models/pet.dart';
 import './MainPage.dart' show signInGoogle, auth, usersRef;
 import 'package:PetHub/models/user.dart';
+
+import 'ShowPostPage.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -76,7 +79,14 @@ class _ProfilePageState extends State<ProfilePage> {
                         scrollDirection: Axis.horizontal,
                         itemCount: snapshots.data.documents.length,
                         itemBuilder: (context, j) {
-                          return Image.network(snapshots.data.documents[j]['url']);
+                          return Hero(child: GestureDetector(
+                            child: Image.network(snapshots.data.documents[j]['url']),
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ShowPostPage(Post.fromDoc(snapshots.data.documents[j]))));
+                            },
+                            ), 
+                            tag: snapshots.data.documents[j]['postId']
+                            );
                         }
                       );
                     }

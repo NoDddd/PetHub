@@ -1,9 +1,11 @@
 
+import 'package:PetHub/models/pet.dart';
 import 'package:PetHub/models/post.dart';
 import 'package:PetHub/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'ShowPostPage.dart';
 import 'SomeoneProfilePage.dart';
 
 class PostWidget extends StatefulWidget {
@@ -28,6 +30,7 @@ class _PostWidgetState extends State<PostWidget> {
                   end: Alignment.bottomCenter)
                   ),
           width: MediaQuery.of(context).size.width,
+          height: 0.9 * MediaQuery.of(context).size.height,
           child: Column(
             children: <Widget>[
               Expanded(
@@ -48,7 +51,12 @@ class _PostWidgetState extends State<PostWidget> {
                     padding: EdgeInsets.all(5),
                     child: FittedBox(
                       fit: BoxFit.contain,
-                      child: Image.network(widget._post.url)
+                      child: Hero(child: GestureDetector(
+                        child: Image.network(widget._post.url),
+                        onTap: () {
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => ShowPostPage(widget._post)));
+                        },
+                        ), tag: widget._post.postId)
                     )
                   ) 
                   ),

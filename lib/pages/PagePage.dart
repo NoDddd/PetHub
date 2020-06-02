@@ -19,16 +19,16 @@ class _PagePageState extends State<PagePage> {
     return Container(
       color: Colors.black,
       child: StreamBuilder(
-        stream: firestore.collection('posts').orderBy('time').limit(25).snapshots(),
+        stream: firestore.collection('posts').orderBy('time', descending: true).limit(25).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.hasError)
           return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.yellow),));          
           else return ListView.builder(
             itemCount: snapshot.data.documents.length,
-            itemExtent: MediaQuery.of(context).size.height * .8,
+            //itemExtent: MediaQuery.of(context).size.height * .8,
             itemBuilder: (context, i) {
               return PostWidget(Post.fromDoc(snapshot.data.documents[i]));
-            },
+            }, 
           );
         },
       )

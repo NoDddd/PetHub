@@ -40,12 +40,6 @@ class CreateAccPage extends StatefulWidget {
                     )
                   ),
                   Align(
-                    alignment: Alignment(-0.5, -1),
-                    child: Transform.rotate(angle: -pi/3,
-                    child: Icon(Icons.pets, size: 300, color: Color(0xff828200),)
-                    )
-                  ),
-                  Align(
                   alignment: Alignment(0, -.2),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),

@@ -18,14 +18,14 @@ class AnimalPage extends StatelessWidget {
   }
   Future<Image> getcat() async {
     var cat = random.nextInt(6);
-    return Image.network(cat_url + catsays[cat]);
+    return Image.network(cat_url);
   }
 
   int rand = 1 + random.nextInt(119);
   List<String> catsays = ['PetHub', 'hello', 'SA-12', 'meow', 'Meow', 'MEOW'];
   String goat_url = 'http://placegoat.com/350';
   String dog_url = 'https://dog.ceo/api/breeds/image/random';
-  String cat_url = 'https://cataas.com/cat/says/';
+  String cat_url = 'https://cataas.com/cat';
   @override
   Widget build(BuildContext context) {
           return Container(

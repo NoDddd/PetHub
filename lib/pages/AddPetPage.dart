@@ -33,12 +33,13 @@ class AddPetPage extends StatefulWidget {
             key: _scaffoldKey,
             appBar: AppBar(leading: FittedBox(child: Icon(Icons.pets, color: Colors.black), fit: BoxFit.fitWidth), title: Text('Account Settings', style: TextStyle(color: Colors.black)), backgroundColor: Colors.yellow,),
             body: Container(
+              height: 2 * MediaQuery.of(context).size.height,
               width: double.infinity,
               color: Colors.black54,
-              child: Column(
+              child: ListView(
                 children: [
-              Flexible(
-                  flex: 1,
+              Container(
+                  height: 120,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
@@ -61,8 +62,8 @@ class AddPetPage extends StatefulWidget {
                     ),
                   )
               ),
-              Flexible(
-                  flex: 1,
+              Container(
+                  height: 120,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
@@ -84,8 +85,8 @@ class AddPetPage extends StatefulWidget {
                     ),
                   )
               ),
-              Flexible(
-                  flex: 1,
+              Container(
+                  height: 120,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
@@ -107,8 +108,8 @@ class AddPetPage extends StatefulWidget {
                     ),
                   )
               ),
-              Flexible(
-                  flex: 1,
+              Container(
+                  height: 120,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
@@ -130,8 +131,8 @@ class AddPetPage extends StatefulWidget {
                     ),
                   )
               ),
-              Flexible(
-                  flex: 1,
+              Container(
+                  height: 120,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(

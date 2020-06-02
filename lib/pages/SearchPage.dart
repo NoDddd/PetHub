@@ -80,7 +80,7 @@ class SearchPage extends StatefulWidget {
           body: Container(
             color: Colors.black87,
             child: result_users == null ?
-            Center(child: Text('PetHub', style: TextStyle(color: Colors.yellow, fontSize: 80),)) :
+            Center(child: Text('PetHub', style: TextStyle(color: Colors.yellow.withOpacity(0.5), fontSize: 70),)) :
             ListView.builder(
               itemCount: result_users.length,
               itemBuilder: (context, i) {
